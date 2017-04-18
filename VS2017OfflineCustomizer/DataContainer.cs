@@ -2,6 +2,12 @@
 {
     class DataContainer
     {
+        private const string VersionOnline = "https://raw.githubusercontent.com/LightDestory/Visual_Studio_2017_Offline_Customizer/master/version.txt";
+
+        private const string Github = "https://github.com/LightDestory/Visual_Studio_2017_Offline_Customizer";
+
+        private const string MyWebsite = "http://lightdestoryweb.altervista.org/";
+
         private const string foldername = "vs_files";
 
         private readonly string[,] Langs =
@@ -60,6 +66,21 @@
         public string GetWorkload_prefix()
         {
             return Workload_prefix;
+        }
+
+        public string GetVersionOnline()
+        {
+            return VersionOnline;
+        }
+
+        public string GetGitHub()
+        {
+            return Github;
+        }
+
+        public string GetMyWebsite()
+        {
+            return MyWebsite;
         }
 
         public string[,] getData(string type)

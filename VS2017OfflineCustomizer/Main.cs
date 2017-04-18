@@ -12,32 +12,34 @@ namespace VS2017OfflineCustomizer
         {
             InitializeComponent();
             Customizer = new Customizer(Application.StartupPath);
+            Customizer.CheckForUpdate(false, Application.ProductVersion);
             LoadUI();
         }
 
         private void LoadUI()
         {
-            for(int i = 0; i< Customizer.Data.getData("files").GetLength(0); i++)
+            ver.Text = Application.ProductVersion;
+            for(int i = 0; i< Customizer.GetData().getData("files").GetLength(0); i++)
             {
-                EdList.Items.Add(Customizer.Data.getData("files")[i, 0].Replace("vs_", "").Replace(".exe", ""));
+                EdList.Items.Add(Customizer.GetData().getData("files")[i, 0].Replace("vs_", "").Replace(".exe", ""));
 
             }
             EdList.SelectedIndex = 0;
-            for (int i = 0; i < Customizer.Data.getData("Language").GetLength(0); i++)
+            for (int i = 0; i < Customizer.GetData().getData("Language").GetLength(0); i++)
             {
-                LangList.Items.Add(Customizer.Data.getData("Language")[i, 0] + " (" + Customizer.Data.getData("Language")[i, 1] + ")");
+                LangList.Items.Add(Customizer.GetData().getData("Language")[i, 0] + " (" + Customizer.GetData().getData("Language")[i, 1] + ")");
             }
             LangList.SelectedIndex = 0;
-            for (int i = 0; i < Customizer.Data.getData("Workload").GetLength(0); i++)
+            for (int i = 0; i < Customizer.GetData().getData("Workload").GetLength(0); i++)
             {
-                WorkList.Items.Add(Customizer.Data.getData("Workload")[i, 0].Replace("Microsoft.VisualStudio.Workload.", ""));
+                WorkList.Items.Add(Customizer.GetData().getData("Workload")[i, 0]);
             }
             WorkList.SelectedIndex = 0;
         }
 
         private void LangSelBtn_Click(object sender, EventArgs e)
         {
-            Customizer.AddRemoveID(Customizer.Data.getData("Language")[LangList.SelectedIndex, 0], Customizer.SelLang);
+            Customizer.AddRemoveID(Customizer.GetData().getData("Language")[LangList.SelectedIndex, 0], Customizer.SelLang);
             UpdateUI(CurrLang, Customizer.SelLang);
         }
 
@@ -60,19 +62,20 @@ namespace VS2017OfflineCustomizer
 
         private void WorkSelBtn_Click(object sender, EventArgs e)
         {
-            Customizer.AddRemoveID(Customizer.Data.getData("Workload")[WorkList.SelectedIndex, 0], Customizer.SelWorkload);
+            Customizer.AddRemoveID(Customizer.GetData().getData("Workload")[WorkList.SelectedIndex, 0], Customizer.SelWorkload);
             UpdateUI(CurrWork, Customizer.SelWorkload);
         }
 
         private void WorkList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Desc.Text = Customizer.Data.getData("Workload")[WorkList.SelectedIndex, 1];
+            Desc.Text = Customizer.GetData().getData("Workload")[WorkList.SelectedIndex, 1];
         }
 
         private void EdSelBtn_Click(object sender, EventArgs e)
         {
             if (!Customizer.PreInit(EdList.SelectedItem.ToString()))
             {
+                MessageBox.Show("Unable to complete \"rReInit\".\nClosing...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
             else
@@ -89,7 +92,7 @@ namespace VS2017OfflineCustomizer
             if(FolderSel.ShowDialog()!= DialogResult.Cancel)
             {
                 String args = Customizer.GetArgs(FolderSel.SelectedPath);
-                Process.Start(Customizer.Paths[Customizer.EdID],args);
+                Process.Start(Customizer.GetPaths()[Customizer.GetID()],args);
                 LangSel.Enabled = false;
                 WorkSel.Enabled = false;
                 StartBtn.Enabled = false;
@@ -104,7 +107,17 @@ namespace VS2017OfflineCustomizer
 
         private void CheckUpdateBtn_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Application.ProductVersion);
+            Customizer.CheckForUpdate(true, Application.ProductVersion);
+        }
+
+        private void OpenGitHub_Click(object sender, EventArgs e)
+        {
+            Process.Start(Customizer.GetData().GetGitHub());
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start(Customizer.GetData().GetMyWebsite());
         }
     }
 }

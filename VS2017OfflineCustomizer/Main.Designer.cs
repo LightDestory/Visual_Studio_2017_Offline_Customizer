@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.EdSelBtn = new System.Windows.Forms.Button();
             this.EdSel = new System.Windows.Forms.GroupBox();
             this.EditionInfo = new System.Windows.Forms.Label();
@@ -51,16 +52,25 @@
             this.TabbedMain = new System.Windows.Forms.TabControl();
             this.CreateTab = new System.Windows.Forms.TabPage();
             this.InfoTab = new System.Windows.Forms.TabPage();
+            this.CheckUpdateBtn = new System.Windows.Forms.Button();
+            this.InfoPanel = new System.Windows.Forms.GroupBox();
+            this.Dev = new System.Windows.Forms.Label();
+            this.DevInfo = new System.Windows.Forms.Label();
+            this.project = new System.Windows.Forms.Label();
+            this.ProjectInfo = new System.Windows.Forms.Label();
+            this.ver = new System.Windows.Forms.Label();
+            this.CurrVerInfo = new System.Windows.Forms.Label();
             this.HomeImage = new System.Windows.Forms.PictureBox();
             this.CloseBtn = new System.Windows.Forms.Button();
-            this.InfoPanel = new System.Windows.Forms.GroupBox();
-            this.CheckUpdateBtn = new System.Windows.Forms.Button();
+            this.OpenGitHub = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.EdSel.SuspendLayout();
             this.LangSel.SuspendLayout();
             this.WorkSel.SuspendLayout();
             this.TabbedMain.SuspendLayout();
             this.CreateTab.SuspendLayout();
             this.InfoTab.SuspendLayout();
+            this.InfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -162,6 +172,7 @@
             // 
             // LangSelBtn
             // 
+            this.LangSelBtn.BackColor = System.Drawing.Color.DimGray;
             this.LangSelBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.LangSelBtn.FlatAppearance.BorderSize = 2;
             this.LangSelBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -172,7 +183,7 @@
             this.LangSelBtn.Size = new System.Drawing.Size(143, 35);
             this.LangSelBtn.TabIndex = 1;
             this.LangSelBtn.Text = "Add/Remove Language";
-            this.LangSelBtn.UseVisualStyleBackColor = true;
+            this.LangSelBtn.UseVisualStyleBackColor = false;
             this.LangSelBtn.Click += new System.EventHandler(this.LangSelBtn_Click);
             // 
             // LangList
@@ -254,6 +265,7 @@
             // 
             // WorkSelBtn
             // 
+            this.WorkSelBtn.BackColor = System.Drawing.Color.DimGray;
             this.WorkSelBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.WorkSelBtn.FlatAppearance.BorderSize = 2;
             this.WorkSelBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
@@ -264,7 +276,7 @@
             this.WorkSelBtn.Size = new System.Drawing.Size(143, 35);
             this.WorkSelBtn.TabIndex = 1;
             this.WorkSelBtn.Text = "Add/Remove Workload";
-            this.WorkSelBtn.UseVisualStyleBackColor = true;
+            this.WorkSelBtn.UseVisualStyleBackColor = false;
             this.WorkSelBtn.Click += new System.EventHandler(this.WorkSelBtn_Click);
             // 
             // WorkList
@@ -330,6 +342,8 @@
             // InfoTab
             // 
             this.InfoTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.InfoTab.Controls.Add(this.button1);
+            this.InfoTab.Controls.Add(this.OpenGitHub);
             this.InfoTab.Controls.Add(this.CheckUpdateBtn);
             this.InfoTab.Controls.Add(this.InfoPanel);
             this.InfoTab.Location = new System.Drawing.Point(4, 29);
@@ -338,6 +352,92 @@
             this.InfoTab.Size = new System.Drawing.Size(492, 537);
             this.InfoTab.TabIndex = 1;
             this.InfoTab.Text = "Info";
+            // 
+            // CheckUpdateBtn
+            // 
+            this.CheckUpdateBtn.BackColor = System.Drawing.Color.DimGray;
+            this.CheckUpdateBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.CheckUpdateBtn.FlatAppearance.BorderSize = 2;
+            this.CheckUpdateBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.CheckUpdateBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.CheckUpdateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CheckUpdateBtn.ForeColor = System.Drawing.Color.White;
+            this.CheckUpdateBtn.Location = new System.Drawing.Point(10, 483);
+            this.CheckUpdateBtn.Name = "CheckUpdateBtn";
+            this.CheckUpdateBtn.Size = new System.Drawing.Size(470, 33);
+            this.CheckUpdateBtn.TabIndex = 1;
+            this.CheckUpdateBtn.Text = "Check for Updates";
+            this.CheckUpdateBtn.UseVisualStyleBackColor = false;
+            this.CheckUpdateBtn.Click += new System.EventHandler(this.CheckUpdateBtn_Click);
+            // 
+            // InfoPanel
+            // 
+            this.InfoPanel.Controls.Add(this.Dev);
+            this.InfoPanel.Controls.Add(this.DevInfo);
+            this.InfoPanel.Controls.Add(this.project);
+            this.InfoPanel.Controls.Add(this.ProjectInfo);
+            this.InfoPanel.Controls.Add(this.ver);
+            this.InfoPanel.Controls.Add(this.CurrVerInfo);
+            this.InfoPanel.ForeColor = System.Drawing.Color.White;
+            this.InfoPanel.Location = new System.Drawing.Point(10, 16);
+            this.InfoPanel.Name = "InfoPanel";
+            this.InfoPanel.Size = new System.Drawing.Size(470, 111);
+            this.InfoPanel.TabIndex = 0;
+            this.InfoPanel.TabStop = false;
+            this.InfoPanel.Text = "About";
+            // 
+            // Dev
+            // 
+            this.Dev.AutoSize = true;
+            this.Dev.Location = new System.Drawing.Point(94, 55);
+            this.Dev.Name = "Dev";
+            this.Dev.Size = new System.Drawing.Size(66, 13);
+            this.Dev.TabIndex = 5;
+            this.Dev.Text = "LightDestory";
+            // 
+            // DevInfo
+            // 
+            this.DevInfo.AutoSize = true;
+            this.DevInfo.Location = new System.Drawing.Point(12, 55);
+            this.DevInfo.Name = "DevInfo";
+            this.DevInfo.Size = new System.Drawing.Size(59, 13);
+            this.DevInfo.TabIndex = 4;
+            this.DevInfo.Text = "Developer:";
+            // 
+            // project
+            // 
+            this.project.AutoSize = true;
+            this.project.Location = new System.Drawing.Point(94, 26);
+            this.project.Name = "project";
+            this.project.Size = new System.Drawing.Size(214, 13);
+            this.project.TabIndex = 3;
+            this.project.Text = "Visual Studio 2017 Offline Layout Customize";
+            // 
+            // ProjectInfo
+            // 
+            this.ProjectInfo.AutoSize = true;
+            this.ProjectInfo.Location = new System.Drawing.Point(12, 26);
+            this.ProjectInfo.Name = "ProjectInfo";
+            this.ProjectInfo.Size = new System.Drawing.Size(43, 13);
+            this.ProjectInfo.TabIndex = 2;
+            this.ProjectInfo.Text = "Project:";
+            // 
+            // ver
+            // 
+            this.ver.AutoSize = true;
+            this.ver.Location = new System.Drawing.Point(94, 85);
+            this.ver.Name = "ver";
+            this.ver.Size = new System.Drawing.Size(0, 13);
+            this.ver.TabIndex = 1;
+            // 
+            // CurrVerInfo
+            // 
+            this.CurrVerInfo.AutoSize = true;
+            this.CurrVerInfo.Location = new System.Drawing.Point(12, 85);
+            this.CurrVerInfo.Name = "CurrVerInfo";
+            this.CurrVerInfo.Size = new System.Drawing.Size(82, 13);
+            this.CurrVerInfo.TabIndex = 0;
+            this.CurrVerInfo.Text = "Current Version:";
             // 
             // HomeImage
             // 
@@ -367,25 +467,39 @@
             this.CloseBtn.UseVisualStyleBackColor = false;
             this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
-            // InfoPanel
+            // OpenGitHub
             // 
-            this.InfoPanel.ForeColor = System.Drawing.Color.White;
-            this.InfoPanel.Location = new System.Drawing.Point(10, 16);
-            this.InfoPanel.Name = "InfoPanel";
-            this.InfoPanel.Size = new System.Drawing.Size(470, 233);
-            this.InfoPanel.TabIndex = 0;
-            this.InfoPanel.TabStop = false;
-            this.InfoPanel.Text = "About";
+            this.OpenGitHub.BackColor = System.Drawing.Color.DimGray;
+            this.OpenGitHub.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.OpenGitHub.FlatAppearance.BorderSize = 2;
+            this.OpenGitHub.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.OpenGitHub.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.OpenGitHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OpenGitHub.ForeColor = System.Drawing.Color.White;
+            this.OpenGitHub.Location = new System.Drawing.Point(10, 444);
+            this.OpenGitHub.Name = "OpenGitHub";
+            this.OpenGitHub.Size = new System.Drawing.Size(470, 33);
+            this.OpenGitHub.TabIndex = 2;
+            this.OpenGitHub.Text = "Open GitHub\'s Page";
+            this.OpenGitHub.UseVisualStyleBackColor = false;
+            this.OpenGitHub.Click += new System.EventHandler(this.OpenGitHub_Click);
             // 
-            // CheckUpdateBtn
+            // button1
             // 
-            this.CheckUpdateBtn.Location = new System.Drawing.Point(50, 487);
-            this.CheckUpdateBtn.Name = "CheckUpdateBtn";
-            this.CheckUpdateBtn.Size = new System.Drawing.Size(142, 23);
-            this.CheckUpdateBtn.TabIndex = 1;
-            this.CheckUpdateBtn.Text = "Check for Updates";
-            this.CheckUpdateBtn.UseVisualStyleBackColor = true;
-            this.CheckUpdateBtn.Click += new System.EventHandler(this.CheckUpdateBtn_Click);
+            this.button1.BackColor = System.Drawing.Color.DimGray;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button1.FlatAppearance.BorderSize = 2;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.White;
+            this.button1.Location = new System.Drawing.Point(10, 405);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(470, 33);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Open My Website";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Main
             // 
@@ -398,6 +512,7 @@
             this.Controls.Add(this.TabbedMain);
             this.Controls.Add(this.HomeImage);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -411,6 +526,8 @@
             this.TabbedMain.ResumeLayout(false);
             this.CreateTab.ResumeLayout(false);
             this.InfoTab.ResumeLayout(false);
+            this.InfoPanel.ResumeLayout(false);
+            this.InfoPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeImage)).EndInit();
             this.ResumeLayout(false);
 
@@ -445,6 +562,14 @@
         private System.Windows.Forms.Label WorkloadInfo;
         private System.Windows.Forms.Button CheckUpdateBtn;
         private System.Windows.Forms.GroupBox InfoPanel;
+        private System.Windows.Forms.Label ver;
+        private System.Windows.Forms.Label CurrVerInfo;
+        private System.Windows.Forms.Label Dev;
+        private System.Windows.Forms.Label DevInfo;
+        private System.Windows.Forms.Label project;
+        private System.Windows.Forms.Label ProjectInfo;
+        private System.Windows.Forms.Button OpenGitHub;
+        private System.Windows.Forms.Button button1;
     }
 }
 

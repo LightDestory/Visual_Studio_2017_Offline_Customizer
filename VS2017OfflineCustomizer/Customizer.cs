@@ -8,11 +8,11 @@ namespace VS2017OfflineCustomizer
 {
     class Customizer
     {
-        public DataContainer Data;
+        private DataContainer Data;
         private String CurrentPath;
-        public String[] Paths;
+        private String[] Paths;
         private WebClient webby;
-        public int i, EdID;
+        private int i, EdID;
         public List<String> SelLang = new List<String>(), SelWorkload = new List<String>();
 
         public Customizer(String CurrentPath)
@@ -21,7 +21,7 @@ namespace VS2017OfflineCustomizer
             Paths = new String[Data.getData("files").Length];
             webby = new WebClient();
             this.CurrentPath = CurrentPath + "\\" + Data.Getfoldername();
-            GetPaths();
+            CreatePaths();
         }
 
         public Boolean PreInit(String edition)
@@ -80,7 +80,7 @@ namespace VS2017OfflineCustomizer
 
         }
 
-        private void GetPaths()
+        private void CreatePaths()
         {
             for(i = 0; i<Data.getData("files").GetLength(0); i++)
             {
@@ -112,6 +112,45 @@ namespace VS2017OfflineCustomizer
             }
         }
 
+        public Boolean CheckForUpdate(Boolean visual, String currver)
+        {
+            Boolean update = false;
+            String ver = "";
+            try
+            {
+                ver = webby.DownloadString(Data.GetVersionOnline());
+                if (!ver.Equals(currver))
+                {
+                    update = true;
+                    if(MessageBox.Show("There is a update avaible!.\nDo you want to open the topic?", "Check for Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    {
+                        System.Diagnostics.Process.Start("Https://www.google.it");
+                    }
+                }
+                else
+                {
+                    if (visual)
+                    {
+                        MessageBox.Show("You are using the latest version.", "Check for Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (WebException)
+            {
+                if(visual)
+                {
+                    MessageBox.Show("Network unavaible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return update;
+        }
+
+        public DataContainer GetData()
+        {
+            return Data;
+        }
+
         public String GetArgs(String saveto)
         {
             String args = "--layout " + saveto;
@@ -120,14 +159,14 @@ namespace VS2017OfflineCustomizer
                 String workarg = " --add";
                 foreach (String s in SelWorkload)
                 {
-                    workarg = workarg + " " + s;
+                    workarg = workarg + " " + Data.GetWorkload_prefix() + s;
                 }
                 args = args + workarg;
             }
             if (SelLang.Count != 0)
             {
                 String langarg = " --lang";
-                foreach(String s in SelLang)
+                foreach (String s in SelLang)
                 {
                     langarg = langarg + " " + s;
                 }
@@ -135,6 +174,16 @@ namespace VS2017OfflineCustomizer
             }
 
             return args;
+        }
+
+        public int GetID()
+        {
+            return EdID;
+        }
+
+        public String[] GetPaths()
+        {
+            return Paths;
         }
     }
 }
