@@ -59,5 +59,15 @@ namespace VS2017OfflineCustomizer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap VSCustomizerHome {
+            get {
+                object obj = ResourceManager.GetObject("VSCustomizerHome", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

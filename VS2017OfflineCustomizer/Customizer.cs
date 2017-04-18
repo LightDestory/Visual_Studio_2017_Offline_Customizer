@@ -20,7 +20,7 @@ namespace VS2017OfflineCustomizer
             Data = new DataContainer();
             Paths = new String[Data.getData("files").Length];
             webby = new WebClient();
-            this.CurrentPath = CurrentPath + "\\" + Data.getFoldername();
+            this.CurrentPath = CurrentPath + "\\" + Data.Getfoldername();
             GetPaths();
         }
 

@@ -1,50 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace VS2017OfflineCustomizer
 {
     public partial class Main : Form
     {
-        Customizer c;
+        Customizer Customizer;
         public Main()
         {
             InitializeComponent();
-            c = new Customizer(Application.StartupPath);
+            Customizer = new Customizer(Application.StartupPath);
             LoadUI();
         }
 
         private void LoadUI()
         {
-            for(int i = 0; i<c.Data.getData("files").GetLength(0); i++)
+            for(int i = 0; i< Customizer.Data.getData("files").GetLength(0); i++)
             {
-                EdList.Items.Add(c.Data.getData("files")[i, 0].Replace("vs_", "").Replace(".exe", ""));
+                EdList.Items.Add(Customizer.Data.getData("files")[i, 0].Replace("vs_", "").Replace(".exe", ""));
 
             }
             EdList.SelectedIndex = 0;
-            for (int i = 0; i < c.Data.getData("Language").GetLength(0); i++)
+            for (int i = 0; i < Customizer.Data.getData("Language").GetLength(0); i++)
             {
-                LangList.Items.Add(c.Data.getData("Language")[i, 0] + " (" + c.Data.getData("Language")[i, 1] + ")");
+                LangList.Items.Add(Customizer.Data.getData("Language")[i, 0] + " (" + Customizer.Data.getData("Language")[i, 1] + ")");
             }
             LangList.SelectedIndex = 0;
-            for (int i = 0; i < c.Data.getData("Workload").GetLength(0); i++)
+            for (int i = 0; i < Customizer.Data.getData("Workload").GetLength(0); i++)
             {
-                WorkList.Items.Add(c.Data.getData("Workload")[i, 0].Replace("Microsoft.VisualStudio.Workload.", ""));
+                WorkList.Items.Add(Customizer.Data.getData("Workload")[i, 0].Replace("Microsoft.VisualStudio.Workload.", ""));
             }
             WorkList.SelectedIndex = 0;
         }
 
         private void LangSelBtn_Click(object sender, EventArgs e)
         {
-            c.AddRemoveID(c.Data.getData("Language")[LangList.SelectedIndex, 0], c.SelLang);
-            UpdateUI(CurrLang, c.SelLang);
+            Customizer.AddRemoveID(Customizer.Data.getData("Language")[LangList.SelectedIndex, 0], Customizer.SelLang);
+            UpdateUI(CurrLang, Customizer.SelLang);
         }
 
         private void UpdateUI(Label component, List<String> data)
@@ -52,25 +46,32 @@ namespace VS2017OfflineCustomizer
             String newtext = "";
             foreach(String c in data)
             {
-                newtext = newtext + ", " + c;
+                if(newtext == "")
+                {
+                    newtext = c;
+                }
+                else
+                {
+                    newtext = newtext + ", " + c;
+                }
             }
             component.Text = newtext;
         }
 
         private void WorkSelBtn_Click(object sender, EventArgs e)
         {
-            c.AddRemoveID(c.Data.getData("Workload")[WorkList.SelectedIndex, 0], c.SelWorkload);
-            UpdateUI(CurrWork, c.SelWorkload);
+            Customizer.AddRemoveID(Customizer.Data.getData("Workload")[WorkList.SelectedIndex, 0], Customizer.SelWorkload);
+            UpdateUI(CurrWork, Customizer.SelWorkload);
         }
 
         private void WorkList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Desc.Text = c.Data.getData("Workload")[WorkList.SelectedIndex, 1];
+            Desc.Text = Customizer.Data.getData("Workload")[WorkList.SelectedIndex, 1];
         }
 
         private void EdSelBtn_Click(object sender, EventArgs e)
         {
-            if (!c.PreInit(EdList.SelectedItem.ToString()))
+            if (!Customizer.PreInit(EdList.SelectedItem.ToString()))
             {
                 Application.Exit();
             }
@@ -87,12 +88,23 @@ namespace VS2017OfflineCustomizer
         {
             if(FolderSel.ShowDialog()!= DialogResult.Cancel)
             {
-                String args = c.GetArgs(FolderSel.SelectedPath);
-                Process.Start(c.Paths[c.EdID],args);
+                String args = Customizer.GetArgs(FolderSel.SelectedPath);
+                Process.Start(Customizer.Paths[Customizer.EdID],args);
                 LangSel.Enabled = false;
                 WorkSel.Enabled = false;
                 StartBtn.Enabled = false;
             }
+        }
+
+        private void CloseBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Thanks for using my app!\r\n- LightDestory", "Good Bye", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Application.Exit();
+        }
+
+        private void CheckUpdateBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Application.ProductVersion);
         }
     }
 }
