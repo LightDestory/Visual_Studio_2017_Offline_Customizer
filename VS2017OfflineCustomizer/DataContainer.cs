@@ -53,9 +53,9 @@
 
         private readonly string[,] files =
         {
-            {"vs_Community.exe","https://download.microsoft.com/download/5/2/1/521C52A7-EFCC-46CE-A890-4F317732ABA3/vs_Community.exe"},
-            {"vs_Professional.exe","https://download.microsoft.com/download/C/5/0/C5092724-4FFE-4DD3-9EE7-0AE31BF17620/vs_Professional.exe"},
-            {"vs_Enterprise.exe","https://download.microsoft.com/download/A/A/3/AA372A6A-C137-474D-95B6-865AF23DF0E1/vs_Enterprise.exe"}
+            {"vs_Community.exe","https://download.microsoft.com/download/A/6/B/A6B03A5D-808D-4E21-9CF7-532D16240AD7/vs_Community.exe"},
+            {"vs_Professional.exe","https://download.microsoft.com/download/7/B/0/7B0534FD-DCE5-46D5-8771-91FD32AFC51D/vs_Professional.exe"},
+            {"vs_Enterprise.exe","https://download.microsoft.com/download/F/3/4/F3478590-7B38-48B1-BB6E-3141A9A155E7/vs_Enterprise.exe"}
         };
 
         public string Getfoldername()
