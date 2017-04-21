@@ -124,7 +124,7 @@ namespace VS2017OfflineCustomizer
                     update = true;
                     if(MessageBox.Show("There is a update avaible!.\nDo you want to open the topic?", "Check for Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
-                        System.Diagnostics.Process.Start("https://forums.mydigitallife.info/threads/visual-studio-2017-offline-installation-customizer.74030/");
+                        System.Diagnostics.Process.Start("Https://www.google.it");
                     }
                 }
                 else
