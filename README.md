@@ -1,5 +1,5 @@
 # :large_blue_diamond: Visual Studio 2017 Offline Layout Customizer
-
+![Preview](preview.png)
 > **When you need something but you can't find it... _JUST CREATE IT_** :shipit:
 
 ## :large_orange_diamond: Description
