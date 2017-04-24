@@ -19,31 +19,31 @@ namespace VS2017OfflineCustomizer
         private void LoadUI()
         {
             ver.Text = Application.ProductVersion;
-            for(int i = 0; i< Customizer.GetData().getData("files").GetLength(0); i++)
+            for(int i = 0; i< DataContainer.GetData("files").GetLength(0); i++)
             {
-                EdList.Items.Add(Customizer.GetData().getData("files")[i, 0].Replace("vs_", "").Replace(".exe", ""));
+                EdList.Items.Add(DataContainer.GetData("files")[i, 0].Replace("vs_", "").Replace(".exe", ""));
 
             }
+            for (int i = 0; i < DataContainer.GetData("Language").GetLength(0); i++)
+            {
+                LangList.Items.Add(DataContainer.GetData("Language")[i, 0] + " (" + DataContainer.GetData("Language")[i, 1] + ")");
+            }
+            for (int i = 0; i < DataContainer.GetData("Workload").GetLength(0); i++)
+            {
+                WorkList.Items.Add(DataContainer.GetData("Workload")[i, 0]);
+            }
             EdList.SelectedIndex = 0;
-            for (int i = 0; i < Customizer.GetData().getData("Language").GetLength(0); i++)
-            {
-                LangList.Items.Add(Customizer.GetData().getData("Language")[i, 0] + " (" + Customizer.GetData().getData("Language")[i, 1] + ")");
-            }
             LangList.SelectedIndex = 0;
-            for (int i = 0; i < Customizer.GetData().getData("Workload").GetLength(0); i++)
-            {
-                WorkList.Items.Add(Customizer.GetData().getData("Workload")[i, 0]);
-            }
             WorkList.SelectedIndex = 0;
         }
 
         private void LangSelBtn_Click(object sender, EventArgs e)
         {
-            Customizer.AddRemoveID(Customizer.GetData().getData("Language")[LangList.SelectedIndex, 0], Customizer.SelLang);
-            UpdateUI(CurrLang, Customizer.SelLang);
+            Customizer.AddRemoveID(DataContainer.GetData("Language")[LangList.SelectedIndex, 0], Customizer.SelLang);
+            CurrLang.Text = UpdateUI(Customizer.SelLang);
         }
 
-        private void UpdateUI(Label component, List<String> data)
+        private String UpdateUI(List<String> data)
         {
             String newtext = "";
             foreach(String c in data)
@@ -57,33 +57,33 @@ namespace VS2017OfflineCustomizer
                     newtext = newtext + ", " + c;
                 }
             }
-            component.Text = newtext;
+            return newtext;
         }
 
         private void WorkSelBtn_Click(object sender, EventArgs e)
         {
-            Customizer.AddRemoveID(Customizer.GetData().getData("Workload")[WorkList.SelectedIndex, 0], Customizer.SelWorkload);
-            UpdateUI(CurrWork, Customizer.SelWorkload);
+            Customizer.AddRemoveID(DataContainer.GetData("Workload")[WorkList.SelectedIndex, 0], Customizer.SelWorkload);
+            CurrWork.Text = UpdateUI(Customizer.SelWorkload);
         }
 
         private void WorkList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Desc.Text = Customizer.GetData().getData("Workload")[WorkList.SelectedIndex, 1];
+            Desc.Text = DataContainer.GetData("Workload")[WorkList.SelectedIndex, 1];
         }
 
         private void EdSelBtn_Click(object sender, EventArgs e)
         {
-            if (!Customizer.PreInit(EdList.SelectedItem.ToString()))
+            if (!Customizer.PreInit())
             {
-                MessageBox.Show("Unable to complete \"rReInit\".\nClosing...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Unable to complete \"rPreInit\".\nClosing...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
             else
             {
-                EdSel.Enabled = false;
                 LangSel.Enabled = true;
                 WorkSel.Enabled = true;
                 StartBtn.Enabled = true;
+                CurrEd.Text = Customizer.SelectEdition(EdList.SelectedItem.ToString());
             }
         }
 
@@ -93,6 +93,7 @@ namespace VS2017OfflineCustomizer
             {
                 String args = Customizer.GetArgs(FolderSel.SelectedPath);
                 Process.Start(Customizer.GetPaths()[Customizer.GetID()],args);
+                EdSel.Enabled = false;
                 LangSel.Enabled = false;
                 WorkSel.Enabled = false;
                 StartBtn.Enabled = false;
@@ -112,12 +113,12 @@ namespace VS2017OfflineCustomizer
 
         private void OpenGitHub_Click(object sender, EventArgs e)
         {
-            Process.Start(Customizer.GetData().GetGitHub());
+            Process.Start(DataContainer.GetGitHub());
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void OpenWeb_Click(object sender, EventArgs e)
         {
-            Process.Start(Customizer.GetData().GetMyWebsite());
+            Process.Start(DataContainer.GetMyWebsite());
         }
     }
 }

@@ -8,7 +8,6 @@ namespace VS2017OfflineCustomizer
 {
     class Customizer
     {
-        private DataContainer Data;
         private String CurrentPath;
         private String[] Paths;
         private WebClient webby;
@@ -17,16 +16,14 @@ namespace VS2017OfflineCustomizer
 
         public Customizer(String CurrentPath)
         {
-            Data = new DataContainer();
-            Paths = new String[Data.getData("files").Length];
+            Paths = new String[DataContainer.GetData("files").Length];
             webby = new WebClient();
-            this.CurrentPath = CurrentPath + "\\" + Data.Getfoldername();
+            this.CurrentPath = CurrentPath + "\\" + DataContainer.Getfoldername();
             CreatePaths();
         }
 
-        public Boolean PreInit(String edition)
+        public Boolean PreInit()
         {
-            SelectEdition(edition);
             if (!(File.Exists(Paths[0]) && File.Exists(Paths[1]) && File.Exists(Paths[2])))
             {
                 try
@@ -35,8 +32,8 @@ namespace VS2017OfflineCustomizer
                     {
                         Directory.CreateDirectory(CurrentPath);
                     }
+                    MessageBox.Show("VS files are not here. I will download the latest version.\nI will freeze for 1-2 minutes,\nSorry.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DownloadExes();
-
                 }
 
                 catch (UnauthorizedAccessException)
@@ -82,33 +79,35 @@ namespace VS2017OfflineCustomizer
 
         private void CreatePaths()
         {
-            for(i = 0; i<Data.getData("files").GetLength(0); i++)
+            for(i = 0; i< DataContainer.GetData("files").GetLength(0); i++)
             {
-                Paths[i] = CurrentPath + "\\" + Data.getData("files")[i, 0];
+                Paths[i] = CurrentPath + "\\" + DataContainer.GetData("files")[i, 0];
             }
         }
 
         private void DownloadExes()
         {
-            for(i = 0; i<Data.getData("files").GetLength(0); i++)
+            for(i = 0; i< DataContainer.GetData("files").GetLength(0); i++)
             {
-                webby.DownloadFile(Data.getData("files")[i, 1], Paths[i]);
+                webby.DownloadFile(DataContainer.GetData("files")[i, 1], Paths[i]);
             }
         }
 
-        private void SelectEdition(String edition)
+        public String SelectEdition(String edition)
         {
             switch (edition)
             {
                 case "Community":
                     EdID = 0;
-                    break;
+                    return "Community";
                 case "Professional":
                     EdID = 1;
-                    break;
+                    return "Professional";
                 case "Enterprise":
                     EdID = 2;
-                    break;
+                    return "Enterprise";
+                default:
+                    return null;
             }
         }
 
@@ -118,13 +117,13 @@ namespace VS2017OfflineCustomizer
             String ver = "";
             try
             {
-                ver = webby.DownloadString(Data.GetVersionOnline());
+                ver = webby.DownloadString(DataContainer.GetVersionOnline());
                 if (!ver.Equals(currver))
                 {
                     update = true;
-                    if(MessageBox.Show("There is a update avaible!.\nDo you want to open the topic?", "Check for Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                    if(MessageBox.Show("There is a update avaible!\nDo you want to open the topic?", "Check for Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
-                        System.Diagnostics.Process.Start("https://forums.mydigitallife.info/threads/visual-studio-2017-offline-installation-customizer.74030/");
+                        System.Diagnostics.Process.Start(DataContainer.GetMyDigitalTopic());
                     }
                 }
                 else
@@ -146,24 +145,19 @@ namespace VS2017OfflineCustomizer
             return update;
         }
 
-        public DataContainer GetData()
-        {
-            return Data;
-        }
-
         public String GetArgs(String saveto)
         {
             String args = "--layout " + saveto;
-            if (SelWorkload.Count != 0)
+            if (SelWorkload.Count > 0 && SelWorkload.Count < 17)
             {
                 String workarg = " --add";
                 foreach (String s in SelWorkload)
                 {
-                    workarg = workarg + " " + Data.GetWorkload_prefix() + s;
+                    workarg = workarg + " " + DataContainer.GetWorkload_prefix() + s;
                 }
                 args = args + workarg;
             }
-            if (SelLang.Count != 0)
+            if (SelLang.Count > 0 && SelLang.Count <14)
             {
                 String langarg = " --lang";
                 foreach (String s in SelLang)
