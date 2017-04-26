@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.EdSelBtn = new System.Windows.Forms.Button();
             this.EdSel = new System.Windows.Forms.GroupBox();
+            this.CurrEd = new System.Windows.Forms.Label();
+            this.CurrEdInfo = new System.Windows.Forms.Label();
             this.EditionInfo = new System.Windows.Forms.Label();
             this.EdList = new System.Windows.Forms.ComboBox();
             this.LangSel = new System.Windows.Forms.GroupBox();
@@ -51,8 +53,13 @@
             this.FolderSel = new System.Windows.Forms.FolderBrowserDialog();
             this.TabbedMain = new System.Windows.Forms.TabControl();
             this.CreateTab = new System.Windows.Forms.TabPage();
+            this.HowInstallTab = new System.Windows.Forms.TabPage();
+            this.HowUpdateInfoPanel = new System.Windows.Forms.GroupBox();
+            this.Updateinfo = new System.Windows.Forms.Label();
+            this.OfflineInstallInfoPanel = new System.Windows.Forms.GroupBox();
+            this.offinstallinfo = new System.Windows.Forms.Label();
             this.InfoTab = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.OpenWebBtn = new System.Windows.Forms.Button();
             this.OpenGitHub = new System.Windows.Forms.Button();
             this.CheckUpdateBtn = new System.Windows.Forms.Button();
             this.InfoPanel = new System.Windows.Forms.GroupBox();
@@ -64,13 +71,14 @@
             this.CurrVerInfo = new System.Windows.Forms.Label();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.HomeImage = new System.Windows.Forms.PictureBox();
-            this.CurrEdInfo = new System.Windows.Forms.Label();
-            this.CurrEd = new System.Windows.Forms.Label();
             this.EdSel.SuspendLayout();
             this.LangSel.SuspendLayout();
             this.WorkSel.SuspendLayout();
             this.TabbedMain.SuspendLayout();
             this.CreateTab.SuspendLayout();
+            this.HowInstallTab.SuspendLayout();
+            this.HowUpdateInfoPanel.SuspendLayout();
+            this.OfflineInstallInfoPanel.SuspendLayout();
             this.InfoTab.SuspendLayout();
             this.InfoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HomeImage)).BeginInit();
@@ -109,6 +117,24 @@
             this.EdSel.TabIndex = 1;
             this.EdSel.TabStop = false;
             this.EdSel.Text = "Edition:";
+            // 
+            // CurrEd
+            // 
+            this.CurrEd.AutoSize = true;
+            this.CurrEd.ForeColor = System.Drawing.Color.Red;
+            this.CurrEd.Location = new System.Drawing.Point(100, 60);
+            this.CurrEd.Name = "CurrEd";
+            this.CurrEd.Size = new System.Drawing.Size(0, 13);
+            this.CurrEd.TabIndex = 3;
+            // 
+            // CurrEdInfo
+            // 
+            this.CurrEdInfo.AutoSize = true;
+            this.CurrEdInfo.Location = new System.Drawing.Point(10, 60);
+            this.CurrEdInfo.Name = "CurrEdInfo";
+            this.CurrEdInfo.Size = new System.Drawing.Size(87, 13);
+            this.CurrEdInfo.TabIndex = 2;
+            this.CurrEdInfo.Text = "Selected Edition:";
             // 
             // EditionInfo
             // 
@@ -314,20 +340,19 @@
             // 
             // FolderSel
             // 
-            this.FolderSel.Description = "Select the folder where download VS. Foldername without SPACE. Suggestion: C:\\vs_" +
-    "2017";
+            this.FolderSel.Description = "Select the folder where download VS. Suggestion: C:\\vs_2017";
             // 
             // TabbedMain
             // 
             this.TabbedMain.Controls.Add(this.CreateTab);
+            this.TabbedMain.Controls.Add(this.HowInstallTab);
             this.TabbedMain.Controls.Add(this.InfoTab);
             this.TabbedMain.HotTrack = true;
-            this.TabbedMain.ItemSize = new System.Drawing.Size(60, 15);
-            this.TabbedMain.Location = new System.Drawing.Point(10, 145);
+            this.TabbedMain.ItemSize = new System.Drawing.Size(80, 18);
+            this.TabbedMain.Location = new System.Drawing.Point(10, 146);
             this.TabbedMain.Name = "TabbedMain";
             this.TabbedMain.SelectedIndex = 0;
             this.TabbedMain.Size = new System.Drawing.Size(361, 469);
-            this.TabbedMain.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.TabbedMain.TabIndex = 7;
             // 
             // CreateTab
@@ -338,43 +363,100 @@
             this.CreateTab.Controls.Add(this.WorkSel);
             this.CreateTab.Controls.Add(this.StartBtn);
             this.CreateTab.ForeColor = System.Drawing.SystemColors.Control;
-            this.CreateTab.Location = new System.Drawing.Point(4, 19);
+            this.CreateTab.Location = new System.Drawing.Point(4, 22);
             this.CreateTab.Name = "CreateTab";
             this.CreateTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CreateTab.Size = new System.Drawing.Size(353, 446);
+            this.CreateTab.Size = new System.Drawing.Size(353, 443);
             this.CreateTab.TabIndex = 0;
             this.CreateTab.Text = "Create";
+            // 
+            // HowInstallTab
+            // 
+            this.HowInstallTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.HowInstallTab.Controls.Add(this.HowUpdateInfoPanel);
+            this.HowInstallTab.Controls.Add(this.OfflineInstallInfoPanel);
+            this.HowInstallTab.Location = new System.Drawing.Point(4, 22);
+            this.HowInstallTab.Name = "HowInstallTab";
+            this.HowInstallTab.Size = new System.Drawing.Size(353, 443);
+            this.HowInstallTab.TabIndex = 2;
+            this.HowInstallTab.Text = "Guides";
+            // 
+            // HowUpdateInfoPanel
+            // 
+            this.HowUpdateInfoPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+            this.HowUpdateInfoPanel.Controls.Add(this.Updateinfo);
+            this.HowUpdateInfoPanel.ForeColor = System.Drawing.Color.White;
+            this.HowUpdateInfoPanel.Location = new System.Drawing.Point(10, 82);
+            this.HowUpdateInfoPanel.Name = "HowUpdateInfoPanel";
+            this.HowUpdateInfoPanel.Size = new System.Drawing.Size(333, 64);
+            this.HowUpdateInfoPanel.TabIndex = 1;
+            this.HowUpdateInfoPanel.TabStop = false;
+            this.HowUpdateInfoPanel.Text = "How Update a Layout";
+            // 
+            // Updateinfo
+            // 
+            this.Updateinfo.AutoSize = true;
+            this.Updateinfo.Location = new System.Drawing.Point(10, 20);
+            this.Updateinfo.MaximumSize = new System.Drawing.Size(313, 40);
+            this.Updateinfo.Name = "Updateinfo";
+            this.Updateinfo.Size = new System.Drawing.Size(291, 26);
+            this.Updateinfo.TabIndex = 0;
+            this.Updateinfo.Text = "1) Select the same edition of your current layout\r\n2) Press \'Start Process\' and p" +
+    "oint the folder of existent layout";
+            // 
+            // OfflineInstallInfoPanel
+            // 
+            this.OfflineInstallInfoPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+            this.OfflineInstallInfoPanel.Controls.Add(this.offinstallinfo);
+            this.OfflineInstallInfoPanel.ForeColor = System.Drawing.Color.White;
+            this.OfflineInstallInfoPanel.Location = new System.Drawing.Point(10, 10);
+            this.OfflineInstallInfoPanel.Name = "OfflineInstallInfoPanel";
+            this.OfflineInstallInfoPanel.Size = new System.Drawing.Size(333, 72);
+            this.OfflineInstallInfoPanel.TabIndex = 0;
+            this.OfflineInstallInfoPanel.TabStop = false;
+            this.OfflineInstallInfoPanel.Text = "How Install from Offline Layout";
+            // 
+            // offinstallinfo
+            // 
+            this.offinstallinfo.AutoSize = true;
+            this.offinstallinfo.Location = new System.Drawing.Point(10, 20);
+            this.offinstallinfo.MaximumSize = new System.Drawing.Size(313, 40);
+            this.offinstallinfo.Name = "offinstallinfo";
+            this.offinstallinfo.Size = new System.Drawing.Size(297, 39);
+            this.offinstallinfo.TabIndex = 0;
+            this.offinstallinfo.Text = "1) Install certificates from \'certificates\' folder inside your layout folder\r\n2) " +
+    "Run vs_EDITION.exe";
             // 
             // InfoTab
             // 
             this.InfoTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
-            this.InfoTab.Controls.Add(this.button1);
+            this.InfoTab.Controls.Add(this.OpenWebBtn);
             this.InfoTab.Controls.Add(this.OpenGitHub);
             this.InfoTab.Controls.Add(this.CheckUpdateBtn);
             this.InfoTab.Controls.Add(this.InfoPanel);
-            this.InfoTab.Location = new System.Drawing.Point(4, 19);
+            this.InfoTab.Location = new System.Drawing.Point(4, 22);
             this.InfoTab.Name = "InfoTab";
             this.InfoTab.Padding = new System.Windows.Forms.Padding(3);
-            this.InfoTab.Size = new System.Drawing.Size(353, 446);
+            this.InfoTab.Size = new System.Drawing.Size(353, 443);
             this.InfoTab.TabIndex = 1;
             this.InfoTab.Text = "Info";
             // 
-            // button1
+            // OpenWebBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.DimGray;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button1.FlatAppearance.BorderSize = 2;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(10, 329);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(337, 33);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Open My Website";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.OpenWeb_Click);
+            this.OpenWebBtn.BackColor = System.Drawing.Color.DimGray;
+            this.OpenWebBtn.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.OpenWebBtn.FlatAppearance.BorderSize = 2;
+            this.OpenWebBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.OpenWebBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.OpenWebBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.OpenWebBtn.ForeColor = System.Drawing.Color.White;
+            this.OpenWebBtn.Location = new System.Drawing.Point(10, 329);
+            this.OpenWebBtn.Name = "OpenWebBtn";
+            this.OpenWebBtn.Size = new System.Drawing.Size(337, 33);
+            this.OpenWebBtn.TabIndex = 3;
+            this.OpenWebBtn.Text = "Open My Website";
+            this.OpenWebBtn.UseVisualStyleBackColor = false;
+            this.OpenWebBtn.Click += new System.EventHandler(this.OpenWeb_Click);
             // 
             // OpenGitHub
             // 
@@ -507,24 +589,6 @@
             this.HomeImage.TabIndex = 6;
             this.HomeImage.TabStop = false;
             // 
-            // CurrEdInfo
-            // 
-            this.CurrEdInfo.AutoSize = true;
-            this.CurrEdInfo.Location = new System.Drawing.Point(10, 60);
-            this.CurrEdInfo.Name = "CurrEdInfo";
-            this.CurrEdInfo.Size = new System.Drawing.Size(87, 13);
-            this.CurrEdInfo.TabIndex = 2;
-            this.CurrEdInfo.Text = "Selected Edition:";
-            // 
-            // CurrEd
-            // 
-            this.CurrEd.AutoSize = true;
-            this.CurrEd.ForeColor = System.Drawing.Color.Red;
-            this.CurrEd.Location = new System.Drawing.Point(100, 60);
-            this.CurrEd.Name = "CurrEd";
-            this.CurrEd.Size = new System.Drawing.Size(0, 13);
-            this.CurrEd.TabIndex = 3;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -549,6 +613,11 @@
             this.WorkSel.PerformLayout();
             this.TabbedMain.ResumeLayout(false);
             this.CreateTab.ResumeLayout(false);
+            this.HowInstallTab.ResumeLayout(false);
+            this.HowUpdateInfoPanel.ResumeLayout(false);
+            this.HowUpdateInfoPanel.PerformLayout();
+            this.OfflineInstallInfoPanel.ResumeLayout(false);
+            this.OfflineInstallInfoPanel.PerformLayout();
             this.InfoTab.ResumeLayout(false);
             this.InfoPanel.ResumeLayout(false);
             this.InfoPanel.PerformLayout();
@@ -592,10 +661,15 @@
         private System.Windows.Forms.Label project;
         private System.Windows.Forms.Label ProjectInfo;
         private System.Windows.Forms.Button OpenGitHub;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button OpenWebBtn;
         private System.Windows.Forms.TextBox CurrWork;
         private System.Windows.Forms.Label CurrEd;
         private System.Windows.Forms.Label CurrEdInfo;
+        private System.Windows.Forms.TabPage HowInstallTab;
+        private System.Windows.Forms.GroupBox HowUpdateInfoPanel;
+        private System.Windows.Forms.Label Updateinfo;
+        private System.Windows.Forms.GroupBox OfflineInstallInfoPanel;
+        private System.Windows.Forms.Label offinstallinfo;
     }
 }
 

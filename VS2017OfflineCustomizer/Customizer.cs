@@ -16,7 +16,7 @@ namespace VS2017OfflineCustomizer
 
         public Customizer(String CurrentPath)
         {
-            Paths = new String[DataContainer.GetData("files").Length];
+            Paths = new String[DataContainer.GetData("files").GetLength(0)];
             webby = new WebClient();
             this.CurrentPath = CurrentPath + "\\" + DataContainer.Getfoldername();
             CreatePaths();
@@ -32,20 +32,23 @@ namespace VS2017OfflineCustomizer
                     {
                         Directory.CreateDirectory(CurrentPath);
                     }
-                    MessageBox.Show("VS files are not here. I will download the latest version.\nI will freeze for 1-2 minutes,\nSorry.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("VS files aren't here. I will download the latest .exe version avaible.\nI will freeze for 1-2 minutes,\nSorry.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     DownloadExes();
+                    MessageBox.Show("Download Completed.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                catch (UnauthorizedAccessException)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Access Denied. Retry running as Admin");
+                    if(ex is UnauthorizedAccessException || ex is IOException)
+                    {
+                        MessageBox.Show("Access Denied. Retry running as Admin", "Error" , MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (ex is WebException)
+                    {
+                        MessageBox.Show("Download Error. Check Network", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     return false;
                     
-                }
-                catch (WebException)
-                {
-                    MessageBox.Show("Download Error. Check Network");
-                    return false;
                 }
                 return true;
             }
@@ -74,7 +77,6 @@ namespace VS2017OfflineCustomizer
             {
                 List.Add(ID);
             }
-
         }
 
         private void CreatePaths()
@@ -111,16 +113,14 @@ namespace VS2017OfflineCustomizer
             }
         }
 
-        public Boolean CheckForUpdate(Boolean visual, String currver)
+        public void CheckForUpdate(Boolean visual, String currver)
         {
-            Boolean update = false;
             String ver = "";
             try
             {
                 ver = webby.DownloadString(DataContainer.GetVersionOnline());
                 if (!ver.Equals(currver))
                 {
-                    update = true;
                     if(MessageBox.Show("There is a update avaible!\nDo you want to open the topic?", "Check for Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
                         System.Diagnostics.Process.Start(DataContainer.GetMyDigitalTopic());
@@ -141,13 +141,11 @@ namespace VS2017OfflineCustomizer
                     MessageBox.Show("Network unavaible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            return update;
         }
 
         public String GetArgs(String saveto)
         {
-            String args = "--layout " + saveto;
+            String args = "--layout \"" + saveto + "\"";
             if (SelWorkload.Count > 0 && SelWorkload.Count < 17)
             {
                 String workarg = " --add";

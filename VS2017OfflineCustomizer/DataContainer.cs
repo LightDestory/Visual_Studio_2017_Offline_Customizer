@@ -107,10 +107,10 @@
 
         private static string GetLatestFile(string link)
         {
-            link = new System.Net.WebClient().DownloadString(link);
-            int start = link.LastIndexOf("downloadUrl = \"") + 15;
-            int end = link.IndexOf("\";<") - start;
-            string latest = link.Substring(start, end);
+            string html = new System.Net.WebClient().DownloadString(link);
+            int start = html.LastIndexOf("downloadUrl = \"") + 15;
+            int end = html.IndexOf("\";<") - start;
+            string latest = html.Substring(start, end);
             return latest;
         }
     }

@@ -45,19 +45,19 @@ namespace VS2017OfflineCustomizer
 
         private String UpdateUI(List<String> data)
         {
-            String newtext = "";
+            String text = "";
             foreach(String c in data)
             {
-                if(newtext == "")
+                if(text == "")
                 {
-                    newtext = c;
+                    text = c;
                 }
                 else
                 {
-                    newtext = newtext + ", " + c;
+                    text = text + ", " + c;
                 }
             }
-            return newtext;
+            return text;
         }
 
         private void WorkSelBtn_Click(object sender, EventArgs e)
@@ -97,6 +97,7 @@ namespace VS2017OfflineCustomizer
                 LangSel.Enabled = false;
                 WorkSel.Enabled = false;
                 StartBtn.Enabled = false;
+                MessageBox.Show("Visual Studio Installation successfully runned. You can close me!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
