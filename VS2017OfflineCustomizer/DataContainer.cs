@@ -10,7 +10,9 @@
 
         private const string MyDigitalTopic = "https://forums.mydigitallife.info/threads/visual-studio-2017-offline-installation-customizer.74030/";
 
-        private const string foldername = "vs_files";
+        private const string FolderName = "vs_files";
+
+        private const string Workload_prefix = "Microsoft.VisualStudio.Workload.";
 
         private static readonly string[,] Langs =
         {
@@ -29,8 +31,6 @@
             {"zh-CN","Chinese-Simplified"},
             {"zh-TW","Chinese-Traditional"}
         };
-
-        private const string Workload_prefix = "Microsoft.VisualStudio.Workload.";
 
         private static readonly string[,] Workloads =
         {
@@ -55,14 +55,14 @@
 
         private static string[,] files =
         {
-            {"vs_Community.exe", GetLatestFile("https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Community")},
-            {"vs_Professional.exe",GetLatestFile("https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Professional")},
-            {"vs_Enterprise.exe",GetLatestFile("https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Enterprise")},
+            {"vs_Community.exe", "https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Community"},
+            {"vs_Professional.exe", "https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Professional"},
+            {"vs_Enterprise.exe", "https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Enterprise"},
         };
 
-        public static string Getfoldername()
+        public static string GetFolderName()
         {
-            return foldername;
+            return FolderName;
         }
 
         public static string GetWorkload_prefix()
@@ -103,15 +103,6 @@
                 default:
                     return null;
             }
-        }
-
-        private static string GetLatestFile(string link)
-        {
-            string html = new System.Net.WebClient().DownloadString(link);
-            int start = html.LastIndexOf("downloadUrl = \"") + 15;
-            int end = html.IndexOf("\";<") - start;
-            string latest = html.Substring(start, end);
-            return latest;
         }
     }
 }

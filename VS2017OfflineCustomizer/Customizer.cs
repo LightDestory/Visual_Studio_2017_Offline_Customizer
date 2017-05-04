@@ -18,7 +18,7 @@ namespace VS2017OfflineCustomizer
         {
             Paths = new String[DataContainer.GetData("files").GetLength(0)];
             webby = new WebClient();
-            this.CurrentPath = CurrentPath + "\\" + DataContainer.Getfoldername();
+            this.CurrentPath = CurrentPath + "\\" + DataContainer.GetFolderName();
             CreatePaths();
         }
 
@@ -33,12 +33,14 @@ namespace VS2017OfflineCustomizer
                         Directory.CreateDirectory(CurrentPath);
                     }
                     MessageBox.Show("VS files aren't here. I will download the latest .exe version avaible.\nI will freeze for 1-2 minutes,\nSorry.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    GetLatestFile();
                     DownloadExes();
                     MessageBox.Show("Download Completed.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 catch (Exception ex)
                 {
+                    Log(ex);
                     if(ex is UnauthorizedAccessException || ex is IOException)
                     {
                         MessageBox.Show("Access Denied. Retry running as Admin", "Error" , MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -55,6 +57,22 @@ namespace VS2017OfflineCustomizer
             else
             {
                 return true;
+            }
+        }
+
+        private void Log(Exception ex)
+        {
+            File.WriteAllText(CurrentPath + "\\log.txt", ex.ToString());
+        }
+
+        private void GetLatestFile()
+        {
+            for(i= 0; i<DataContainer.GetData("files").GetLength(1); i++)
+            {
+                string html = webby.DownloadString(DataContainer.GetData("files")[i,1]);
+                int start = html.LastIndexOf("downloadUrl = \"") + 15;
+                int end = html.IndexOf("\";<") - start;
+                DataContainer.GetData("files")[i,1] = html.Substring(start, end);
             }
         }
 
@@ -134,8 +152,9 @@ namespace VS2017OfflineCustomizer
                     }
                 }
             }
-            catch (WebException)
+            catch (WebException wex)
             {
+                Log(wex);
                 if(visual)
                 {
                     MessageBox.Show("Network unavaible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

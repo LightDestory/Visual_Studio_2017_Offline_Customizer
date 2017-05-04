@@ -14,6 +14,27 @@ namespace VS2017OfflineCustomizer
             Customizer = new Customizer(Application.StartupPath);
             Customizer.CheckForUpdate(false, Application.ProductVersion);
             LoadUI();
+            Testing();
+        }
+
+        private void Testing()
+        {
+            System.Net.WebClient test = new System.Net.WebClient();
+            String s = test.DownloadString("https://docs.microsoft.com/en-us/visualstudio/install/workload-component-id-vs-community");
+            System.IO.StringReader rea = new System.IO.StringReader(s);
+            int i = 0;
+            string[] strArr = s.Replace("\r", "").Split('\n');
+            for (i = 0; i < strArr.Length; i++)
+            {
+                if (strArr[i].Contains("<p><strong>ID:</strong>"))
+                {
+                    System.IO.File.AppendAllText(Application.StartupPath + "\\ids.txt", strArr[i]);
+                }
+                if (strArr[i].Equals("<td>Optional</td>") || strArr[i].Equals("<td>Recommended</td>"))
+                {
+                    System.IO.File.AppendAllText(Application.StartupPath + "\\ids.txt", strArr[i-3].Replace("<td>", "").Replace("</td>", "") + "\r\n");
+                }
+            }
         }
 
         private void LoadUI()
