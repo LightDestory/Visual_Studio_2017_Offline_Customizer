@@ -55,9 +55,9 @@
 
         private static string[,] files =
         {
-            {"vs_Community.exe", "https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Community"},
-            {"vs_Professional.exe", "https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Professional"},
-            {"vs_Enterprise.exe", "https://www.visualstudio.com/it/thank-you-downloading-visual-studio/?sku=Enterprise"},
+            {"vs_Community.exe", "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community"},
+            {"vs_Professional.exe", "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Professional"},
+            {"vs_Enterprise.exe", "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Enterprise"}
         };
 
         public static string GetFolderName()

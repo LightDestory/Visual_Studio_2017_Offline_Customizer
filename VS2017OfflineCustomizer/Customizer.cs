@@ -67,11 +67,11 @@ namespace VS2017OfflineCustomizer
 
         private void GetLatestFile()
         {
-            for(i= 0; i<DataContainer.GetData("files").GetLength(1); i++)
+            for(i= 0; i<DataContainer.GetData("files").GetLength(0); i++)
             {
                 string html = webby.DownloadString(DataContainer.GetData("files")[i,1]);
-                int start = html.LastIndexOf("downloadUrl = \"") + 15;
-                int end = html.IndexOf("\";<") - start;
+                int start = html.LastIndexOf("downloadUrl: '") + 14;
+                int end = html.IndexOf("'};") - start;
                 DataContainer.GetData("files")[i,1] = html.Substring(start, end);
             }
         }
