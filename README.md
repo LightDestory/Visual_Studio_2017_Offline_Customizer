@@ -13,8 +13,7 @@ A simple GUI tool to create your own Visual Studio 2017 offline installation.
 ## :large_orange_diamond: TO-DO :scream:
 - [x] Basic Function
 - [x] Better GUI
-- [ ] Update Layout
-- [ ] Add Component Selection
+- [x] Update Layout
 
 ## :large_orange_diamond: License :copyright:
 [This Project is under GNU GPLv3]
