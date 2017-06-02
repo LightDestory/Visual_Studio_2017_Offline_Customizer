@@ -33,7 +33,6 @@ namespace VS2017OfflineCustomizer
                         Directory.CreateDirectory(CurrentPath);
                     }
                     MessageBox.Show("VS files aren't here. I will download the latest .exe version avaible.\nI will freeze for 1-2 minutes,\nSorry.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    GetLatestFile();
                     DownloadExes();
                     MessageBox.Show("Download Completed.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -63,17 +62,6 @@ namespace VS2017OfflineCustomizer
         private void Log(Exception ex)
         {
             File.WriteAllText(CurrentPath + "\\log.txt", ex.ToString());
-        }
-
-        private void GetLatestFile()
-        {
-            for(i= 0; i<DataContainer.GetData("files").GetLength(0); i++)
-            {
-                string html = webby.DownloadString(DataContainer.GetData("files")[i,1]);
-                int start = html.LastIndexOf("downloadUrl: '") + 14;
-                int end = html.IndexOf("'};") - start;
-                DataContainer.GetData("files")[i,1] = html.Substring(start, end);
-            }
         }
 
         public void AddRemoveID(String ID, List<String> List)
@@ -136,12 +124,12 @@ namespace VS2017OfflineCustomizer
             String ver = "";
             try
             {
-                ver = webby.DownloadString(DataContainer.GetVersionOnline());
+                ver = webby.DownloadString(DataContainer.GetLinkResouce("onlinever"));
                 if (!ver.Equals(currver))
                 {
                     if(MessageBox.Show("There is a update avaible!\nDo you want to open the topic?", "Check for Update", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                     {
-                        System.Diagnostics.Process.Start(DataContainer.GetMyDigitalTopic());
+                        System.Diagnostics.Process.Start(DataContainer.GetLinkResouce("forum"));
                     }
                 }
                 else

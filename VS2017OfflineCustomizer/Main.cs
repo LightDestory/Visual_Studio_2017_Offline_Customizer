@@ -114,12 +114,12 @@ namespace VS2017OfflineCustomizer
 
         private void OpenGitHub_Click(object sender, EventArgs e)
         {
-            Process.Start(DataContainer.GetGitHub());
+            Process.Start(DataContainer.GetLinkResouce("github"));
         }
 
         private void OpenWeb_Click(object sender, EventArgs e)
         {
-            Process.Start(DataContainer.GetMyWebsite());
+            Process.Start(DataContainer.GetLinkResouce("website"));
         }
     }
 }

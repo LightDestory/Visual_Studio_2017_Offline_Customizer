@@ -2,13 +2,13 @@
 {
     class DataContainer
     {
-        private const string VersionOnline = "https://raw.githubusercontent.com/LightDestory/Visual_Studio_2017_Offline_Customizer/master/version.txt";
-
-        private const string Github = "https://github.com/LightDestory/Visual_Studio_2017_Offline_Customizer";
-
-        private const string MyWebsite = "http://lightdestoryweb.altervista.org/";
-
-        private const string MyDigitalTopic = "https://forums.mydigitallife.info/threads/visual-studio-2017-offline-installation-customizer.74030/";
+        private static readonly string[] Links =
+        {
+            "https://raw.githubusercontent.com/LightDestory/Visual_Studio_2017_Offline_Customizer/master/version.txt",
+            "https://github.com/LightDestory/Visual_Studio_2017_Offline_Customizer",
+            "http://lightdestoryweb.altervista.org/",
+            "https://forums.mydigitallife.info/threads/visual-studio-2017-offline-installation-customizer.74030/",
+        };
 
         private const string FolderName = "vs_files";
 
@@ -53,11 +53,11 @@
             {"WebCrossPlat", "Build Android, iOS and UWP apps using Tools for Apache Cordova."}
         };
 
-        private static string[,] files =
+        private static readonly string[,] files =
         {
-            {"vs_Community.exe", "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Community"},
-            {"vs_Professional.exe", "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Professional"},
-            {"vs_Enterprise.exe", "https://www.visualstudio.com/thank-you-downloading-visual-studio/?sku=Enterprise"}
+            {"vs_Community.exe", "https://aka.ms/vs/15/release/vs_community.exe"},
+            {"vs_Professional.exe", "https://aka.ms/vs/15/release/vs_professional.exe"},
+            {"vs_Enterprise.exe", "https://aka.ms/vs/15/release/vs_enterprise.exe"}
         };
 
         public static string GetFolderName()
@@ -65,29 +65,26 @@
             return FolderName;
         }
 
+        public static string GetLinkResouce(string id)
+        {
+            switch (id)
+            {
+                case "onlinever":
+                    return Links[0];
+                case "github":
+                    return Links[1];
+                case "website":
+                    return Links[2];
+                case "forum":
+                    return Links[3];
+                default:
+                    return "";
+            }
+        }
+
         public static string GetWorkload_prefix()
         {
             return Workload_prefix;
-        }
-
-        public static string GetVersionOnline()
-        {
-            return VersionOnline;
-        }
-
-        public static string GetGitHub()
-        {
-            return Github;
-        }
-
-        public static string GetMyWebsite()
-        {
-            return MyWebsite;
-        }
-
-        public static string GetMyDigitalTopic()
-        {
-            return MyDigitalTopic;
         }
 
         public static string[,] GetData(string type)
