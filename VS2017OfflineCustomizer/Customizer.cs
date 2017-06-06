@@ -150,15 +150,15 @@ namespace VS2017OfflineCustomizer
             }
         }
 
-        public String GetArgs(String saveto)
+        public String GetArgs(String saveto, int componentaction)
         {
             String args = "--layout \"" + saveto + "\"";
             if (SelWorkload.Count > 0 && SelWorkload.Count < 17)
             {
-                String workarg = " --add";
+                String workarg = "";
                 foreach (String s in SelWorkload)
                 {
-                    workarg = workarg + " " + DataContainer.GetWorkload_prefix() + s;
+                    workarg = workarg + " " + "--add " + DataContainer.GetWorkload_prefix() + s;
                 }
                 args = args + workarg;
             }
@@ -171,8 +171,14 @@ namespace VS2017OfflineCustomizer
                 }
                 args = args + langarg;
             }
-
-            return args;
+            if (componentaction == 0)
+            {
+                return args;
+            }
+            else
+            {
+                return (args + " " + DataContainer.GetData("Components")[componentaction,1]);
+            }
         }
 
         public int GetID()

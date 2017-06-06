@@ -71,6 +71,8 @@
             this.CurrVerInfo = new System.Windows.Forms.Label();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.HomeImage = new System.Windows.Forms.PictureBox();
+            this.ComponentsInfo = new System.Windows.Forms.Label();
+            this.ComponentAction = new System.Windows.Forms.ComboBox();
             this.EdSel.SuspendLayout();
             this.LangSel.SuspendLayout();
             this.WorkSel.SuspendLayout();
@@ -228,6 +230,8 @@
             // WorkSel
             // 
             this.WorkSel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(120)))), ((int)(((byte)(120)))));
+            this.WorkSel.Controls.Add(this.ComponentAction);
+            this.WorkSel.Controls.Add(this.ComponentsInfo);
             this.WorkSel.Controls.Add(this.CurrWork);
             this.WorkSel.Controls.Add(this.WorkloadInfo);
             this.WorkSel.Controls.Add(this.Desc);
@@ -239,7 +243,7 @@
             this.WorkSel.ForeColor = System.Drawing.Color.White;
             this.WorkSel.Location = new System.Drawing.Point(10, 205);
             this.WorkSel.Name = "WorkSel";
-            this.WorkSel.Size = new System.Drawing.Size(333, 191);
+            this.WorkSel.Size = new System.Drawing.Size(333, 231);
             this.WorkSel.TabIndex = 4;
             this.WorkSel.TabStop = false;
             this.WorkSel.Text = "Workload";
@@ -330,9 +334,9 @@
             this.StartBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.StartBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.StartBtn.ForeColor = System.Drawing.Color.White;
-            this.StartBtn.Location = new System.Drawing.Point(24, 402);
+            this.StartBtn.Location = new System.Drawing.Point(10, 442);
             this.StartBtn.Name = "StartBtn";
-            this.StartBtn.Size = new System.Drawing.Size(303, 34);
+            this.StartBtn.Size = new System.Drawing.Size(333, 34);
             this.StartBtn.TabIndex = 5;
             this.StartBtn.Text = "Start Process";
             this.StartBtn.UseVisualStyleBackColor = false;
@@ -352,7 +356,7 @@
             this.TabbedMain.Location = new System.Drawing.Point(10, 146);
             this.TabbedMain.Name = "TabbedMain";
             this.TabbedMain.SelectedIndex = 0;
-            this.TabbedMain.Size = new System.Drawing.Size(361, 469);
+            this.TabbedMain.Size = new System.Drawing.Size(361, 508);
             this.TabbedMain.TabIndex = 7;
             // 
             // CreateTab
@@ -366,7 +370,7 @@
             this.CreateTab.Location = new System.Drawing.Point(4, 22);
             this.CreateTab.Name = "CreateTab";
             this.CreateTab.Padding = new System.Windows.Forms.Padding(3);
-            this.CreateTab.Size = new System.Drawing.Size(353, 443);
+            this.CreateTab.Size = new System.Drawing.Size(353, 482);
             this.CreateTab.TabIndex = 0;
             this.CreateTab.Text = "Create";
             // 
@@ -377,7 +381,7 @@
             this.HowInstallTab.Controls.Add(this.OfflineInstallInfoPanel);
             this.HowInstallTab.Location = new System.Drawing.Point(4, 22);
             this.HowInstallTab.Name = "HowInstallTab";
-            this.HowInstallTab.Size = new System.Drawing.Size(353, 443);
+            this.HowInstallTab.Size = new System.Drawing.Size(353, 482);
             this.HowInstallTab.TabIndex = 2;
             this.HowInstallTab.Text = "Guides";
             // 
@@ -437,7 +441,7 @@
             this.InfoTab.Location = new System.Drawing.Point(4, 22);
             this.InfoTab.Name = "InfoTab";
             this.InfoTab.Padding = new System.Windows.Forms.Padding(3);
-            this.InfoTab.Size = new System.Drawing.Size(353, 443);
+            this.InfoTab.Size = new System.Drawing.Size(353, 482);
             this.InfoTab.TabIndex = 1;
             this.InfoTab.Text = "Info";
             // 
@@ -589,13 +593,31 @@
             this.HomeImage.TabIndex = 6;
             this.HomeImage.TabStop = false;
             // 
+            // ComponentsInfo
+            // 
+            this.ComponentsInfo.AutoSize = true;
+            this.ComponentsInfo.Location = new System.Drawing.Point(7, 188);
+            this.ComponentsInfo.Name = "ComponentsInfo";
+            this.ComponentsInfo.Size = new System.Drawing.Size(146, 13);
+            this.ComponentsInfo.TabIndex = 9;
+            this.ComponentsInfo.Text = "Select Additional Component:";
+            // 
+            // ComponentAction
+            // 
+            this.ComponentAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComponentAction.FormattingEnabled = true;
+            this.ComponentAction.Location = new System.Drawing.Point(8, 204);
+            this.ComponentAction.Name = "ComponentAction";
+            this.ComponentAction.Size = new System.Drawing.Size(153, 21);
+            this.ComponentAction.TabIndex = 10;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(381, 625);
+            this.ClientSize = new System.Drawing.Size(381, 666);
             this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.TabbedMain);
             this.Controls.Add(this.HomeImage);
@@ -670,6 +692,8 @@
         private System.Windows.Forms.Label Updateinfo;
         private System.Windows.Forms.GroupBox OfflineInstallInfoPanel;
         private System.Windows.Forms.Label offinstallinfo;
+        private System.Windows.Forms.ComboBox ComponentAction;
+        private System.Windows.Forms.Label ComponentsInfo;
     }
 }
 

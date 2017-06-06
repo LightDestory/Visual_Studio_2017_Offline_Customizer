@@ -32,9 +32,14 @@ namespace VS2017OfflineCustomizer
             {
                 WorkList.Items.Add(DataContainer.GetData("Workload")[i, 0]);
             }
+            for (int i = 0; i < DataContainer.GetData("Components").GetLength(0); i++)
+            {
+                ComponentAction.Items.Add(DataContainer.GetData("Components")[i, 0]);
+            }
             EdList.SelectedIndex = 0;
             LangList.SelectedIndex = 0;
             WorkList.SelectedIndex = 0;
+            ComponentAction.SelectedIndex = 0;
         }
 
         private void LangSelBtn_Click(object sender, EventArgs e)
@@ -91,7 +96,7 @@ namespace VS2017OfflineCustomizer
         {
             if(FolderSel.ShowDialog()!= DialogResult.Cancel)
             {
-                String args = Customizer.GetArgs(FolderSel.SelectedPath);
+                String args = Customizer.GetArgs(FolderSel.SelectedPath, ComponentAction.SelectedIndex);
                 Process.Start(Customizer.GetPaths()[Customizer.GetID()],args);
                 EdSel.Enabled = false;
                 LangSel.Enabled = false;
