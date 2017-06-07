@@ -2,6 +2,9 @@
 ![Preview](preview.png)
 > **When you need something but you can't find it... _JUST CREATE IT_** :shipit:
 
+## :large_orange_diamond: Video Preview
+https://www.youtube.com/embed/sy6ew3UEexw
+
 ## :large_orange_diamond: Description
 A simple GUI tool to create your own Visual Studio 2017 offline installation.
 
