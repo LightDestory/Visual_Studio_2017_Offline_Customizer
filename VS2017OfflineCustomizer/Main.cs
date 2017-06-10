@@ -8,6 +8,7 @@ namespace VS2017OfflineCustomizer
     public partial class Main : Form
     {
         Customizer Customizer;
+
         public Main()
         {
             InitializeComponent();
@@ -96,13 +97,14 @@ namespace VS2017OfflineCustomizer
         {
             if(FolderSel.ShowDialog()!= DialogResult.Cancel)
             {
-                String args = Customizer.GetArgs(FolderSel.SelectedPath, ComponentAction.SelectedIndex);
+                Customizer.setSaveTo(FolderSel.SelectedPath);
+                String args = Customizer.GetArgs(ComponentAction.SelectedIndex);
                 Process.Start(Customizer.GetPaths()[Customizer.GetID()],args);
                 EdSel.Enabled = false;
                 LangSel.Enabled = false;
                 WorkSel.Enabled = false;
                 StartBtn.Enabled = false;
-                MessageBox.Show("Visual Studio Installation successfully runned. You can close me!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Visual Studio Installation successfully runned. You can close me!\nIf after bootstrapper doesn't show up nothing (like a cmd window) please Contact me!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -125,6 +127,22 @@ namespace VS2017OfflineCustomizer
         private void OpenWeb_Click(object sender, EventArgs e)
         {
             Process.Start(DataContainer.GetLinkResouce("website"));
+        }
+
+        private void installcert_Click(object sender, EventArgs e)
+        {
+            if (Customizer.getSaveTo().Equals(""))
+            {
+                if (FolderSel.ShowDialog()!= DialogResult.Cancel)
+                {
+                    Customizer.setSaveTo(FolderSel.SelectedPath);
+                    Customizer.InstallCerts();
+                }
+            }
+            else
+            {
+                Customizer.InstallCerts();
+            }
         }
     }
 }

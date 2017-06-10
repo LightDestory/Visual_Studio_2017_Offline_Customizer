@@ -3,12 +3,13 @@ using System.IO;
 using System.Net;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 namespace VS2017OfflineCustomizer
 {
     class Customizer
     {
-        private String CurrentPath;
+        private String CurrentPath, SaveTo = "";
         private String[] Paths;
         private WebClient webby;
         private int i, EdID;
@@ -150,9 +151,9 @@ namespace VS2017OfflineCustomizer
             }
         }
 
-        public String GetArgs(String saveto, int componentaction)
+        public String GetArgs(int componentaction)
         {
-            String args = "--layout \"" + saveto + "\"";
+            String args = "--layout \"" + SaveTo + "\"";
             if (SelWorkload.Count > 0 && SelWorkload.Count < 17)
             {
                 String workarg = "";
@@ -189,6 +190,43 @@ namespace VS2017OfflineCustomizer
         public String[] GetPaths()
         {
             return Paths;
+        }
+
+        public void setSaveTo(String folder)
+        {
+            SaveTo = folder;
+        }
+        
+        public String getSaveTo()
+        {
+            return SaveTo;
+        }
+
+        public void InstallCerts()
+        {
+            try
+            {
+                string[] certs = Directory.GetFiles(SaveTo + "\\certificates");
+                if (certs.Length == 0)
+                {
+                    MessageBox.Show("No certificates inside folder... Wrong Folder or Layout corrupted!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    foreach (String cert in certs)
+                    {
+                        var x = System.Diagnostics.Process.Start(cert);
+                        x.WaitForExit();
+                    }
+                    MessageBox.Show("Installation Completed.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            catch(Exception ex)
+            {
+                MessageBox.Show("Can't find or unable to access to certificates' folder. Retry running as Admin", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            SaveTo = "";
         }
     }
 }

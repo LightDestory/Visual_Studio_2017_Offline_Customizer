@@ -52,12 +52,14 @@
             {"VisualStudioExtension", "Create add-ons and extensions for Visual Studio, including new commands, code analyzers and tool windows."},
             {"WebCrossPlat", "Build Android, iOS and UWP apps using Tools for Apache Cordova."}
         };
+
         private static readonly string[,] ComponentsAction =
         {
             {"None",""},
             {"Only Recommended","--includeRecommended"},
             {"Recommended and Optional","--includeOptional"}
         };
+
         private static readonly string[,] files =
         {
             {"vs_Community.exe", "https://aka.ms/vs/15/release/vs_community.exe"},

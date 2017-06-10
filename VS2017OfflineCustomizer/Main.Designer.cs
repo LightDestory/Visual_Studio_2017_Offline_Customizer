@@ -42,6 +42,8 @@
             this.LangSelBtn = new System.Windows.Forms.Button();
             this.LangList = new System.Windows.Forms.ComboBox();
             this.WorkSel = new System.Windows.Forms.GroupBox();
+            this.ComponentAction = new System.Windows.Forms.ComboBox();
+            this.ComponentsInfo = new System.Windows.Forms.Label();
             this.CurrWork = new System.Windows.Forms.TextBox();
             this.WorkloadInfo = new System.Windows.Forms.Label();
             this.Desc = new System.Windows.Forms.Label();
@@ -71,8 +73,7 @@
             this.CurrVerInfo = new System.Windows.Forms.Label();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.HomeImage = new System.Windows.Forms.PictureBox();
-            this.ComponentsInfo = new System.Windows.Forms.Label();
-            this.ComponentAction = new System.Windows.Forms.ComboBox();
+            this.installcert = new System.Windows.Forms.Button();
             this.EdSel.SuspendLayout();
             this.LangSel.SuspendLayout();
             this.WorkSel.SuspendLayout();
@@ -248,6 +249,24 @@
             this.WorkSel.TabStop = false;
             this.WorkSel.Text = "Workload";
             // 
+            // ComponentAction
+            // 
+            this.ComponentAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComponentAction.FormattingEnabled = true;
+            this.ComponentAction.Location = new System.Drawing.Point(8, 204);
+            this.ComponentAction.Name = "ComponentAction";
+            this.ComponentAction.Size = new System.Drawing.Size(153, 21);
+            this.ComponentAction.TabIndex = 10;
+            // 
+            // ComponentsInfo
+            // 
+            this.ComponentsInfo.AutoSize = true;
+            this.ComponentsInfo.Location = new System.Drawing.Point(7, 188);
+            this.ComponentsInfo.Name = "ComponentsInfo";
+            this.ComponentsInfo.Size = new System.Drawing.Size(146, 13);
+            this.ComponentsInfo.TabIndex = 9;
+            this.ComponentsInfo.Text = "Select Additional Component:";
+            // 
             // CurrWork
             // 
             this.CurrWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(160)))), ((int)(((byte)(160)))));
@@ -377,6 +396,7 @@
             // HowInstallTab
             // 
             this.HowInstallTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+            this.HowInstallTab.Controls.Add(this.installcert);
             this.HowInstallTab.Controls.Add(this.HowUpdateInfoPanel);
             this.HowInstallTab.Controls.Add(this.OfflineInstallInfoPanel);
             this.HowInstallTab.Location = new System.Drawing.Point(4, 22);
@@ -454,7 +474,7 @@
             this.OpenWebBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.OpenWebBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.OpenWebBtn.ForeColor = System.Drawing.Color.White;
-            this.OpenWebBtn.Location = new System.Drawing.Point(10, 329);
+            this.OpenWebBtn.Location = new System.Drawing.Point(10, 365);
             this.OpenWebBtn.Name = "OpenWebBtn";
             this.OpenWebBtn.Size = new System.Drawing.Size(337, 33);
             this.OpenWebBtn.TabIndex = 3;
@@ -471,7 +491,7 @@
             this.OpenGitHub.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.OpenGitHub.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.OpenGitHub.ForeColor = System.Drawing.Color.White;
-            this.OpenGitHub.Location = new System.Drawing.Point(10, 368);
+            this.OpenGitHub.Location = new System.Drawing.Point(10, 404);
             this.OpenGitHub.Name = "OpenGitHub";
             this.OpenGitHub.Size = new System.Drawing.Size(337, 33);
             this.OpenGitHub.TabIndex = 2;
@@ -488,7 +508,7 @@
             this.CheckUpdateBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
             this.CheckUpdateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CheckUpdateBtn.ForeColor = System.Drawing.Color.White;
-            this.CheckUpdateBtn.Location = new System.Drawing.Point(10, 407);
+            this.CheckUpdateBtn.Location = new System.Drawing.Point(10, 443);
             this.CheckUpdateBtn.Name = "CheckUpdateBtn";
             this.CheckUpdateBtn.Size = new System.Drawing.Size(337, 33);
             this.CheckUpdateBtn.TabIndex = 1;
@@ -593,23 +613,22 @@
             this.HomeImage.TabIndex = 6;
             this.HomeImage.TabStop = false;
             // 
-            // ComponentsInfo
+            // installcert
             // 
-            this.ComponentsInfo.AutoSize = true;
-            this.ComponentsInfo.Location = new System.Drawing.Point(7, 188);
-            this.ComponentsInfo.Name = "ComponentsInfo";
-            this.ComponentsInfo.Size = new System.Drawing.Size(146, 13);
-            this.ComponentsInfo.TabIndex = 9;
-            this.ComponentsInfo.Text = "Select Additional Component:";
-            // 
-            // ComponentAction
-            // 
-            this.ComponentAction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComponentAction.FormattingEnabled = true;
-            this.ComponentAction.Location = new System.Drawing.Point(8, 204);
-            this.ComponentAction.Name = "ComponentAction";
-            this.ComponentAction.Size = new System.Drawing.Size(153, 21);
-            this.ComponentAction.TabIndex = 10;
+            this.installcert.BackColor = System.Drawing.Color.DimGray;
+            this.installcert.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.installcert.FlatAppearance.BorderSize = 2;
+            this.installcert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.installcert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver;
+            this.installcert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.installcert.ForeColor = System.Drawing.Color.White;
+            this.installcert.Location = new System.Drawing.Point(10, 436);
+            this.installcert.Name = "installcert";
+            this.installcert.Size = new System.Drawing.Size(337, 33);
+            this.installcert.TabIndex = 2;
+            this.installcert.Text = "Install Certificates";
+            this.installcert.UseVisualStyleBackColor = false;
+            this.installcert.Click += new System.EventHandler(this.installcert_Click);
             // 
             // Main
             // 
@@ -694,6 +713,7 @@
         private System.Windows.Forms.Label offinstallinfo;
         private System.Windows.Forms.ComboBox ComponentAction;
         private System.Windows.Forms.Label ComponentsInfo;
+        private System.Windows.Forms.Button installcert;
     }
 }
 
